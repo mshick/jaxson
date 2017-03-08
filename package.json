@@ -1,6 +1,6 @@
 {
   "name": "jaxson",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A JSON-to-JSON mapping utility, with coercion, reverse mapping, and default values.",
   "main": "index.js",
   "license": "MIT",
