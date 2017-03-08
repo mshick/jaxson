@@ -233,10 +233,10 @@ function jaxson(source, mapObject, {reverse} = {}) {
   return result;
 }
 
-exports.load = function (loadedMap, loadedOptions) {
+module.exports = jaxson;
+
+module.exports.load = function (loadedMap, loadedOptions) {
   return function(source) {
     return jaxson(source, loadedMap, loadedOptions);
   };
 };
-
-module.exports = jaxson;
