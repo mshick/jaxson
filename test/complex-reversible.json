@@ -1,0 +1,104 @@
+{
+  "isReversible": true,
+  "propertyMap": [
+    [
+      {
+        "key": "firstName"
+      }, {
+        "key": "first_name"
+      }
+    ],
+    [
+      {
+        "key": "lastName"
+      }, {
+        "key": "last_name"
+      }
+    ],
+    [
+      {
+        "key": "agreements.termsAccepted",
+        "type": "string"
+      }, {
+        "key": "terms_accepted",
+        "type": "boolean"
+      }
+    ],
+    [
+      {
+        "key": "agreements.termsAcceptedAt",
+        "format": "date-time",
+        "pattern": "YYYY-MM-DDTHH:mm:ssZ"
+      }, {
+        "key": "terms_accepted_at",
+        "format": "date-time",
+        "pattern": "YYYY-MM-DDTHH:mm:ss.SSSZ"
+      }
+    ],
+    [
+      {
+          "key": "homeNumber"
+      }, {
+          "key": "phones[0].number"
+      }
+    ],
+    [
+      null,
+      {
+        "key": "phones[0].type",
+        "default": "home"
+      }
+    ],
+    [
+      {
+        "key": "mobileNumber"
+      }, {
+        "key": "phones[1].number"
+      }
+    ],
+    [
+      null,
+      {
+        "key": "phones[1].type",
+        "default": "mobile"
+      }
+    ],
+    [
+      {
+        "key": "age",
+        "type": "number"
+      }, {
+        "key": "age",
+        "type": "string",
+        "default": 0
+      }
+    ],
+    [
+      {
+        "key": "random",
+        "type": "string"
+      }, {
+        "key": "stuff[0]",
+        "type": "string"
+      }
+    ],
+    [
+      {
+        "key": "items[].subItems[0].subName",
+        "type": "string"
+      }, {
+        "key": "giant_list",
+        "type": "array"
+      }
+    ],
+    [
+      {
+        "key": "items[].name",
+        "type": "string"
+      }, {
+        "key": "giant_list_names",
+        "type": "array"
+      }
+    ]
+  ]
+}

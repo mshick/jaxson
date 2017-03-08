@@ -1,0 +1,7 @@
+{
+  "isReversible": true,
+  "propertyMap": [
+    ["firstName", "first_name"],
+    ["lastName", "last_name"]    
+  ]
+}

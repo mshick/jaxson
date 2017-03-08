@@ -1,0 +1,27 @@
+{
+  "firstName": "Michael",
+  "lastName": "Shick",
+  "agreements": {
+    "termsAccepted": "true",
+    "termsAcceptedAt": "2015-03-21T10:51:23-08:00"
+  },
+  "age": 36,
+  "homeNumber": "919-360-0095",
+  "mobileNumber": "222-222-2222",
+  "random": "abc",
+  "items": [
+    {
+      "name": "item1",
+      "subItems": [
+        {"subName": "foo"}
+      ]
+    },
+    {"name": "item2"},
+    {
+      "name": "item3",
+      "subItems": [
+        {"subName": "bar"}
+      ]
+    }
+  ]
+}

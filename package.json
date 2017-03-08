@@ -1,0 +1,26 @@
+{
+  "name": "jaxson",
+  "version": "0.1.0",
+  "description": "A JSON-to-JSON mapping utility, with coercion, reverse mapping, and default values.",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "json",
+    "mapping",
+    "utility",
+    "badidea?",
+    "mapper",
+    "coercion",
+    "json-schema"
+  ]
+}
