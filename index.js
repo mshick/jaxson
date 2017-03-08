@@ -19,6 +19,7 @@ const isObjectLike = require('lodash/isObjectLike');
 const reduce = require('lodash/reduce');
 const each = require('lodash/each');
 const map = require('lodash/map');
+const isFunction = require('lodash/isFunction');
 
 const EMPTY_ARR_RE = /\[\]/g;
 const LEADING_DOT_RE = /^\./;
@@ -150,7 +151,14 @@ function jaxson(source, mapObject, {reverse} = {}) {
       left = {key: null};
     }
 
-    const {key: lKey, type: lType, format: lFormat, pattern: lPattern, default: lDefault} = left;
+    const {
+      key: lKey,
+      type: lType,
+      format: lFormat,
+      pattern: lPattern,
+      default: lDefault,
+      transformValue: lTransformValue
+    } = left;
 
     if (isString(right)) {
       right = {key: right};
@@ -158,7 +166,14 @@ function jaxson(source, mapObject, {reverse} = {}) {
       right = {key: null};
     }
 
-    const {key: rKey, type: rType, format: rFormat, pattern: rPattern, default: rDefault} = right;
+    const {
+      key: rKey,
+      type: rType,
+      format: rFormat,
+      pattern: rPattern,
+      default: rDefault,
+      transformValue: rTransformValue
+    } = right;
 
     let value;
 
@@ -178,27 +193,33 @@ function jaxson(source, mapObject, {reverse} = {}) {
       }
     }
 
-    if (isUndefined(value) || isNull(value) && rDefault) {
-      value = rDefault;
-    }
+    if (!isUndefined(value) || !isNull(value)) {
+      if (rType) {
+        try {
+          value = coerceType({value, type: rType});
+        } catch(e) {
+          console.warn('Value could not be coerced', item);
+        }
+      }
 
-    if (isUndefined(value)) {
-      return;
-    }
-
-    if (rType) {
-      try {
-        value = coerceType({value, type: rType});
-      } catch(e) {
-        console.warn('Value could not be coerced', item);
+      if (rFormat === 'date-time') {
+        try {
+          value = formatDateTime({value, lPattern, rPattern});
+        } catch(e) {
+          console.warn('Value could not be formatted', item);
+        }
       }
     }
 
-    if (rFormat === 'date-time') {
-      try {
-        value = formatDateTime({value, lPattern, rPattern});
-      } catch(e) {
-        console.warn('Value could not be formatted', item);
+    if (isFunction(rTransformValue)) {
+      value = rTransformValue({value, left, right, source});
+    }
+
+    if (isUndefined(value)) {
+      if (!isUndefined(rDefault)) {
+        value = rDefault;
+      } else {
+        return;
       }
     }
 
