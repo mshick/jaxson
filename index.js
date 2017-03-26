@@ -63,6 +63,8 @@ function coerceType({value, type}) {
         value = value;
       } else if (isObject(value)) {
         value = toPairs(value);
+      } else if (isNull(value)) {
+        value = [];
       } else {
         value = castArray(value);
       }
@@ -193,7 +195,7 @@ function jaxson(source, mapObject, {reverse} = {}) {
       }
     }
 
-    if (!isUndefined(value) || !isNull(value)) {
+    if (!isUndefined(value)) {
       if (rType) {
         try {
           value = coerceType({value, type: rType});
