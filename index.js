@@ -195,33 +195,33 @@ function jaxson(source, mapObject, {reverse} = {}) {
       }
     }
 
-    if (!isUndefined(value)) {
-      if (rType) {
-        try {
-          value = coerceType({value, type: rType});
-        } catch(e) {
-          console.warn('Value could not be coerced', item);
-        }
-      }
-
-      if (rFormat === 'date-time') {
-        try {
-          value = formatDateTime({value, lPattern, rPattern});
-        } catch(e) {
-          console.warn('Value could not be formatted', item);
-        }
-      }
-    }
-
     if (isFunction(rTransformValue)) {
       value = rTransformValue({value, left, right, source});
-    }
+    } else {
+      if (!isUndefined(value)) {
+        if (rType) {
+          try {
+            value = coerceType({value, type: rType});
+          } catch(e) {
+            console.warn('Value could not be coerced', item);
+          }
+        }
 
-    if (isUndefined(value)) {
-      if (!isUndefined(rDefault)) {
-        value = rDefault;
-      } else {
-        return;
+        if (rFormat === 'date-time') {
+          try {
+            value = formatDateTime({value, lPattern, rPattern});
+          } catch(e) {
+            console.warn('Value could not be formatted', item);
+          }
+        }
+      }
+
+      if (isUndefined(value)) {
+        if (!isUndefined(rDefault)) {
+          value = rDefault;
+        } else {
+          return;
+        }
       }
     }
 
