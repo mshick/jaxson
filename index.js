@@ -225,6 +225,10 @@ function jaxson(source, mapObject, {reverse} = {}) {
       }
     }
 
+    if (isUndefined(value)) {
+      return;
+    }
+
     if (EMPTY_ARR_RE.test(rKey)) {
       setEmptyArr(result, rKey, value);
     } else {
@@ -238,6 +242,12 @@ function jaxson(source, mapObject, {reverse} = {}) {
 module.exports = jaxson;
 
 module.exports.load = function (loadedMap, loadedOptions) {
+  return function(source) {
+    return jaxson(source, loadedMap, loadedOptions);
+  };
+};
+
+module.exports.compile = function (loadedMap, loadedOptions) {
   return function(source) {
     return jaxson(source, loadedMap, loadedOptions);
   };
