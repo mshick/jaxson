@@ -2,6 +2,7 @@
   "isReversible": true,
   "propertyMap": [
     ["firstName", "first_name"],
-    ["lastName", "last_name"]
+    ["lastName", "last_name"],
+    ["empty[].fooBar", "empty[].foo_bar"]
   ]
 }

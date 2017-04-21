@@ -100,7 +100,10 @@ function getEmptyArr(obj, path) {
     const p1 = p.replace(LEADING_DOT_RE, '');
     const p2 = parts[pI + 1] ? parts[pI + 1].replace(LEADING_DOT_RE, '') : null;
     if (!pI) {
-      val = map(get(obj, p1), x => get(x, p2) ? get(x, p2) : null);
+      const p1Val = get(obj, p1);
+      if (p1Val !== undefined) {
+        val = map(p1Val, x => get(x, p2) ? get(x, p2) : null);
+      }
     } else if (p2) {
       val = map(val, n => { return n ? get(n[0], p2) : null; });
     }
